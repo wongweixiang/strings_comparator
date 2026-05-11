@@ -1,5 +1,10 @@
 import API from "./API";
 
+type CompareStringsParams = {
+  pcode: string;
+  string1pcode: string;
+};
+
 type CompareStringsResponse = {
   COFball: string;
   COFball1: string;
@@ -27,9 +32,11 @@ type CompareStringsResponse = {
   tension1: string;
 };
 
-export const compareStrings = async (): Promise<CompareStringsResponse> => {
-  return await API.post(`/api/learning_center/similarstringcompare.php`, {
-    pcode: "GMOTOS16",
-    string1pcode: "GLW16",
-  });
+export const compareStrings = async (
+  params: CompareStringsParams,
+): Promise<CompareStringsResponse> => {
+  return await API.post(
+    `/api/learning_center/similarstringcompare.php`,
+    params,
+  );
 };

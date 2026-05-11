@@ -37,13 +37,17 @@ const API = {
     let response;
 
     try {
+      const formData = new FormData();
+      Object.entries(body).forEach(([key, value]) => {
+        formData.append(key, value);
+      });
+
       response = await fetch(baseUrl + endpoint, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify(body),
+        body: formData,
       });
 
       return await response.json();

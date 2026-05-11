@@ -13,7 +13,10 @@ function App() {
 
   const query = useQuery({
     queryKey: ["string-comparison", string1, string2],
-    queryFn: compareStrings,
+    queryFn: compareStrings({
+      pcode: string1,
+      string1pcode: string2,
+    }),
     enabled: !!string1 && !!string2,
   });
 
