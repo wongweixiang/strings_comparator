@@ -1,3 +1,5 @@
+import { type FC } from "react";
+
 import {
   Combobox,
   ComboboxContent,
@@ -6,25 +8,23 @@ import {
   ComboboxItem,
   ComboboxList,
 } from "@/components/ui/combobox";
+import { options } from "@/constants/options";
 
-const frameworks = [
-  "Next.js",
-  "SvelteKit",
-  "Nuxt.js",
-  "Remix",
-  "Astro",
-] as const;
+type SearchBoxProps = {
+  value?: string;
+  setValue?: (value: string) => void;
+};
 
-export const SearchBox = () => {
+export const SearchBox: FC<SearchBoxProps> = ({ value, setValue }) => {
   return (
-    <Combobox items={frameworks}>
-      <ComboboxInput placeholder="Select a framework" />
+    <Combobox items={options} value={value} onValueChange={setValue}>
+      <ComboboxInput placeholder="Select a string" />
       <ComboboxContent>
         <ComboboxEmpty>No items found.</ComboboxEmpty>
         <ComboboxList>
-          {(item) => (
-            <ComboboxItem key={item} value={item}>
-              {item}
+          {(string, index) => (
+            <ComboboxItem key={`${string.value}-${index}`} value={string.value}>
+              {string.name}
             </ComboboxItem>
           )}
         </ComboboxList>
