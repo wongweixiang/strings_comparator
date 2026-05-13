@@ -1,10 +1,8 @@
-// api/proxy.ts
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 const TARGET = "https://twu.tennis-warehouse.com/learning_center";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  // /api/proxy/similarstringcompare.php → /learning_center/similarstringcompare.php
   const path = req.url?.replace("/api/proxy", "") ?? "";
 
   const response = await fetch(`${TARGET}${path}`, {
@@ -12,6 +10,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     body: req.method !== "GET" ? req.body : undefined,
     headers: {
       "Content-Type": req.headers["content-type"] || "application/x-www-form-urlencoded",
+      "Referer": "https://twu.tennis-warehouse.com/",
+      "Origin": "https://twu.tennis-warehouse.com",
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
     },
   });
 
