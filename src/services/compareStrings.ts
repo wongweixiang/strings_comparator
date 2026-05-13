@@ -35,8 +35,8 @@ type CompareStringsResponse = {
 */
 
 type StringData = {
+  code: string;
   name: string;
-  gauge: string;
   material: string;
   stats: {
     stiffness: string,
@@ -61,13 +61,14 @@ export const compareStrings = async (
     params,
   );
 
-  const {brand, string, material, stiffness, tension, energy, ratio, COFball, COFstatic} = rawResponse
-  const {brand1, string1, material1, stiffness1, tension1, energy1, ratio1, COFball1, COFstatic1} = rawResponse
+  const {pcode, brand, string, material, stiffness, tension, energy, ratio, COFball, COFstatic} = rawResponse
+  const {pcode1, brand1, string1, material1, stiffness1, tension1, energy1, ratio1, COFball1, COFstatic1} = rawResponse
 
   return {
     stringA: {
+      code: pcode, 
       name: `${brand} ${string}`,
-      gauge: "plc",
+
       material,
       stats: {
         stiffness,
@@ -80,8 +81,9 @@ export const compareStrings = async (
       }
     },
     stringB: {
+      code: pcode1, 
       name: `${brand1} ${string1}`,
-      gauge: "plc",
+
       material: material1,
       stats: {
         stiffness: stiffness1,

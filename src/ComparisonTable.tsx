@@ -1,4 +1,4 @@
-import type { FC } from "react";
+
 
 type StatConfig = {
   label: string;
@@ -62,34 +62,6 @@ const placeholder: StringData = {
     spinPotential: '',
     stringFriction: '',
     ballFriction: '',
-  },
-};
-
-const STRING_A: StringData = {
-  name: "Gamma Live Wire 16",
-  gauge: "16g",
-  material: "Nylon / Zyex",
-  stats: {
-    stiffness: 159,
-    tensionLoss: 30,
-    energyReturn: 91,
-    spinPotential: 2.6,
-    stringFriction: 0.145,
-    ballFriction: 0.381,
-  },
-};
-
-const STRING_B: StringData = {
-  name: "Gamma FXT 17 (1.24)",
-  gauge: "17g",
-  material: "Nylon",
-  stats: {
-    stiffness: 154,
-    tensionLoss: 12,
-    energyReturn: 94,
-    spinPotential: 4.8,
-    stringFriction: 0.095,
-    ballFriction: 0.452,
   },
 };
 
@@ -193,19 +165,21 @@ const StringComparison = ({data}) => {
   return (
     <div className="max-w-2xl mx-auto p-6 font-sans">
       <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 mb-6">
-        <div>
+        <div className='flex flex-col justify-center items-center'>
+          <img width='150px' src={`https://img.tennis-warehouse.com/watermark/rs.php?path=${stringA.code}-1.jpg`} />
           <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{stringA.name}</p>
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
-            {stringA.material} · {stringA.gauge}
+            {stringA.material}
           </p>
         </div>
         <div className="text-xs text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2 text-center">
           vs
         </div>
-        <div className="text-right">
+        <div  className='flex flex-col justify-center items-center'>
+          <img width='150px' src={`https://img.tennis-warehouse.com/watermark/rs.php?path=${stringB.code}-1.jpg`} />
           <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{stringB.name}</p>
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
-            {stringB.material} · {stringB.gauge}
+            {stringB.material}
           </p>
         </div>
       </div>
