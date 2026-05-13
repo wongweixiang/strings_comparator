@@ -9,10 +9,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     method: req.method,
     body: req.method !== "GET" ? req.body : undefined,
     headers: {
-      "Content-Type": req.headers["content-type"] || "application/x-www-form-urlencoded",
+      ...req.headers as Record<string, string>,  // forward all browser headers
+      "host": "twu.tennis-warehouse.com",         // override host to match target
       "Referer": "https://twu.tennis-warehouse.com/",
       "Origin": "https://twu.tennis-warehouse.com",
-      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
     },
   });
 
