@@ -57,7 +57,7 @@ export const compareStrings = async (
   params: CompareStringsParams,
 ): Promise<CompareStringsResponse> => {
   const rawResponse = await API.post(
-    `/api/learning_center/similarstringcompare.php`,
+    `/similarstringcompare.php`,
     params,
   );
 

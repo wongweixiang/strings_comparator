@@ -1,6 +1,6 @@
 import { createSearchParams } from "react-router-dom";
 
-const baseUrl = "";
+const baseUrl = "/api/proxy";
 
 const API = {
   get: async (

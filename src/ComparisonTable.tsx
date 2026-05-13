@@ -166,7 +166,7 @@ const StringComparison = ({data}) => {
     <div className="max-w-2xl mx-auto p-6 font-sans">
       <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 mb-6">
         <div className='flex flex-col justify-center items-center'>
-          <img width='150px' src={`https://img.tennis-warehouse.com/watermark/rs.php?path=${stringA.code}-1.jpg`} />
+          <img width='150px' height='150px' src={`https://img.tennis-warehouse.com/watermark/rs.php?path=${stringA.code}-1.jpg`} />
           <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{stringA.name}</p>
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
             {stringA.material}
@@ -176,7 +176,7 @@ const StringComparison = ({data}) => {
           vs
         </div>
         <div  className='flex flex-col justify-center items-center'>
-          <img width='150px' src={`https://img.tennis-warehouse.com/watermark/rs.php?path=${stringB.code}-1.jpg`} />
+          <img width='150px' height='150px' src={`https://img.tennis-warehouse.com/watermark/rs.php?path=${stringB.code}-1.jpg`} />
           <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{stringB.name}</p>
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
             {stringB.material}
