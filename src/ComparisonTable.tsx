@@ -1,59 +1,14 @@
+import type { FC } from "react";
+
+import { STAT_CONFIG, STAT_KEYS, type StatConfig } from "./constants/statConfig";
+import type { CompareStringsResponse, StringData } from "./services/compareStrings";
 
 
-type StatConfig = {
-  label: string;
-  sublabel: string;
-  higherIsBetter: boolean;
-  format?: (val: number | string) => string;
-};
 
-type StringData = {
-  name: string;
-  gauge: string;
-  material: string;
-  stats: Record<string, number | string>;
-};
-
-const STAT_CONFIG: Record<string, StatConfig> = {
-  stiffness: {
-    label: "Stiffness",
-    sublabel: "lb/in · lower is better",
-    higherIsBetter: false,
-  },
-  tensionLoss: {
-    label: "Tension loss",
-    sublabel: "% · lower is better",
-    higherIsBetter: false,
-    format: (v) => `${v}%`,
-  },
-  energyReturn: {
-    label: "Energy return",
-    sublabel: "% · higher is better",
-    higherIsBetter: true,
-    format: (v) => `${v}%`,
-  },
-  spinPotential: {
-    label: "Spin potential",
-    sublabel: "higher is better",
-    higherIsBetter: true,
-  },
-  stringFriction: {
-    label: "String friction",
-    sublabel: "COF · lower is better",
-    higherIsBetter: false,
-  },
-  ballFriction: {
-    label: "Ball friction",
-    sublabel: "COF · higher is better",
-    higherIsBetter: true,
-  },
-};
-
-const STAT_KEYS = Object.keys(STAT_CONFIG);
 
 const placeholder: StringData = {
+  code: "",
   name: "",
-  gauge: "",
   material: "",
   stats: {
     stiffness: '',
@@ -88,13 +43,13 @@ function formatVal(val: number | string, config: StatConfig): string {
 }
 
 type StatRowProps = {
-  statKey: string;
+  // statKey: string;
   config: StatConfig;
   valA: number | string;
   valB: number | string;
 };
 
-function StatRow({ statKey, config, valA, valB }: StatRowProps) {
+function StatRow({ config, valA, valB }: StatRowProps) {
   const numA = Number(valA);
   const numB = Number(valB);
   const max = Math.max(numA, numB);
@@ -157,7 +112,11 @@ function StatRow({ statKey, config, valA, valB }: StatRowProps) {
   );
 }
 
-const StringComparison = ({data}) => {
+type StringComparisonProps = {
+  data: CompareStringsResponse | undefined
+}
+
+const StringComparison: FC<StringComparisonProps> = ({ data }) => {
     const dataIncludingPlaceholder = data ?? { stringA: placeholder, stringB: placeholder }
 
     const {stringA, stringB} = dataIncludingPlaceholder
@@ -188,7 +147,6 @@ const StringComparison = ({data}) => {
         {STAT_KEYS.map((key) => (
           <StatRow
             key={key}
-            statKey={key}
             config={STAT_CONFIG[key]}
             valA={stringA.stats[key]}
             valB={stringB.stats[key]}

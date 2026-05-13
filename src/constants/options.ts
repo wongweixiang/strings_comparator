@@ -1,4 +1,4 @@
-type Option = { name: string; value: string };
+export type Option = { name: string; value: string };
 
 export const options: Option[] = [
   { name: "Alien Black Diamond 16", value: "ABD16" },

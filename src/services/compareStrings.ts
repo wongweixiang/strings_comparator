@@ -1,3 +1,5 @@
+import type { STAT_CONFIG } from "@/constants/statConfig";
+
 import API from "./API";
 
 type CompareStringsParams = {
@@ -34,21 +36,14 @@ type CompareStringsResponse = {
 };
 */
 
-type StringData = {
+export type StringData = {
   code: string;
   name: string;
   material: string;
-  stats: {
-    stiffness: string,
-    tensionLoss: string,
-    energyReturn: string,
-    spinPotential: string,
-    stringFriction: string,
-    ballFriction: string,
-  };
+  stats: Record<keyof typeof STAT_CONFIG, number | string>;
 };
 
-type CompareStringsResponse = {
+export type CompareStringsResponse = {
   stringA: StringData
   stringB: StringData
 }

@@ -10,14 +10,16 @@ import {
 } from "@/components/ui/combobox";
 import { options } from "@/constants/options";
 
+import type { Option } from "./constants/options";
+
 type StringOption = {
   name: string
   value: string
 }
 
 type SearchBoxProps = {
-  value?: StringOption;
-  setValue?: (value: StringOption) => void;
+  value?: StringOption | null;
+  setValue?: (value: StringOption | null) => void;
 };
 
 // value={value} onValueChange={setValue}
@@ -26,14 +28,14 @@ export const SearchBox: FC<SearchBoxProps> = ({ value, setValue }) => {
   return (
     <Combobox items={options} 
     value={value} onValueChange={setValue}
-    itemToStringValue={(option) => option.name}
+    itemToStringValue={(option: Option) => option.name}
     >
       <ComboboxInput placeholder="Select a string" 
       />
       <ComboboxContent>
         <ComboboxEmpty>No items found.</ComboboxEmpty>
         <ComboboxList>
-          {(string) => (
+          {(string: Option) => (
             <ComboboxItem key={string.name} value={string}>
               {string.name}
             </ComboboxItem>
