@@ -5,6 +5,7 @@ type CompareStringsParams = {
   string1pcode: string;
 };
 
+/*
 type CompareStringsResponse = {
   COFball: string;
   COFball1: string;
@@ -31,12 +32,66 @@ type CompareStringsResponse = {
   tension: string;
   tension1: string;
 };
+*/
+
+type StringData = {
+  name: string;
+  gauge: string;
+  material: string;
+  stats: {
+    stiffness: string,
+    tensionLoss: string,
+    energyReturn: string,
+    spinPotential: string,
+    stringFriction: string,
+    ballFriction: string,
+  };
+};
+
+type CompareStringsResponse = {
+  stringA: StringData
+  stringB: StringData
+}
 
 export const compareStrings = async (
   params: CompareStringsParams,
 ): Promise<CompareStringsResponse> => {
-  return await API.post(
+  const rawResponse = await API.post(
     `/api/learning_center/similarstringcompare.php`,
     params,
   );
+
+  const {brand, string, material, stiffness, tension, energy, ratio, COFball, COFstatic} = rawResponse
+  const {brand1, string1, material1, stiffness1, tension1, energy1, ratio1, COFball1, COFstatic1} = rawResponse
+
+  return {
+    stringA: {
+      name: `${brand} ${string}`,
+      gauge: "plc",
+      material,
+      stats: {
+        stiffness,
+        tensionLoss: tension,
+        energyReturn: energy,
+        spinPotential: ratio,
+        stringFriction: COFstatic,
+        ballFriction: COFball,
+
+      }
+    },
+    stringB: {
+      name: `${brand1} ${string1}`,
+      gauge: "plc",
+      material: material1,
+      stats: {
+        stiffness: stiffness1,
+        tensionLoss: tension1,
+        energyReturn: energy1,
+        spinPotential: ratio1,
+        stringFriction: COFstatic1,
+        ballFriction: COFball1,
+
+      }
+    },
+  }
 };

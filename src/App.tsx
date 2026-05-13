@@ -3,28 +3,30 @@ import "./App.css";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
+import StringComparison from "./ComparisonTable";
 import { SearchBox } from "./SearchBox";
 import { compareStrings } from "./services/compareStrings";
 
 function App() {
-  const [string1, setString1] = useState("");
-  const [string2, setString2] = useState("");
-  console.log(string1, string2);
+  const [string0, setString0] = useState({});
+  const [string1, setString1] = useState({});
+  // console.log(string0, string1);
 
-  const query = useQuery({
-    queryKey: ["string-comparison", string1, string2],
-    queryFn: compareStrings({
-      pcode: string1,
-      string1pcode: string2,
+  const { data } = useQuery({
+    queryKey: ["string-comparison", string0, string1],
+    queryFn: () => compareStrings({
+      pcode: string0?.value,
+      string1pcode: string1?.value,
     }),
-    enabled: !!string1 && !!string2,
+    enabled: !!string0 && !!string1,
   });
 
   return (
     <>
       <section id="center">
+        <SearchBox value={string0} setValue={setString0} />
         <SearchBox value={string1} setValue={setString1} />
-        <SearchBox value={string2} setValue={setString2} />
+        <StringComparison data={data}/>
       </section>
     </>
   );

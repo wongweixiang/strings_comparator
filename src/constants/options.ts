@@ -61,7 +61,6 @@ export const options: Option[] = [
   { name: "Diadem Solstice Power 17 (1.20)", value: "DSP17" },
   { name: "Diadem Solstice Pro 15L (1.35)", value: "DSPRO15L" },
   { name: "Diadem Solstice Pro 16L (1.25)", value: "DSPRO16L" },
-  { name: "Diadem Solstice Pro 16L (1.25)", value: "DSPRO16L" },
   { name: "Double AR 666 (1.30)", value: "DAR666" },
   { name: "Double AR Diablo (1.24)", value: "DARD24" },
   { name: "Double AR Diablo (1.31)", value: "DARD31" },
