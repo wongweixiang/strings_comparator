@@ -2,7 +2,8 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { MongoClient } from "mongodb";
 
-const MONGODB_URI = process.env.MONGODB_URI!;
+const MONGODB_URI = process.env.MONGODB_URI;
+
 const DB_NAME = "tennis";
 const COLLECTION = "strings";
 
@@ -11,7 +12,11 @@ let client: MongoClient;
 
 async function getClient() {
   if (!client) {
-    client = new MongoClient(MONGODB_URI);
+    client = new MongoClient(MONGODB_URI, {
+      tls: true,
+      tlsInsecure: true,
+      serverSelectionTimeoutMS: 5000,
+    });
     await client.connect();
   }
   return client;
@@ -39,6 +44,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const client = await getClient();
+    console.log({client})
     const collection = client.db(DB_NAME).collection(COLLECTION);
 
     const [docA, docB] = await Promise.all([
