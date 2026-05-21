@@ -12,14 +12,14 @@ import { options } from "@/constants/options";
 
 import type { Option } from "./constants/options";
 
-type StringOption = {
-  name: string
-  value: string
-}
+// type StringOption = {
+//   name: string
+//   value: string
+// }
 
 type SearchBoxProps = {
-  value?: StringOption | null;
-  setValue?: (value: StringOption | null) => void;
+  value?: string;
+  setValue?: (value: string) => void;
 };
 
 // value={value} onValueChange={setValue}
