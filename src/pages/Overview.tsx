@@ -1,13 +1,13 @@
-import "./App.css";
+import "../App.css";
 
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
-import StringComparison from "./ComparisonTable";
-import { SearchBox } from "./SearchBox";
-import { fetchComparison } from "./services/compare";
+import StringComparison from "../ComparisonTable";
+import { SearchBox } from "../SearchBox";
+import { fetchComparison } from "../services/compare";
 
-function App() {
+function Overview() {
   const [string0, setString0] = useState("Toroline O-Toro Spin 17 (1.23)");
   const [string1, setString1] = useState("Diadem Solstice Pro 16L (1.25)");
 
@@ -30,4 +30,4 @@ function App() {
   );
 }
 
-export default App;
+export default Overview;

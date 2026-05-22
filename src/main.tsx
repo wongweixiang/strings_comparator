@@ -6,7 +6,8 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import {BrowserRouter, Route,Routes} from 'react-router-dom'
 
-import App from "./App.tsx";
+import Comparison from "./pages/Comparison";
+import Overview from "./pages/Overview";
 import { ROUTES } from "./constants/routes.ts";
 import { Header } from "./Header.tsx";
 
@@ -19,8 +20,8 @@ createRoot(document.getElementById("root")!).render(
       <BrowserRouter>
         <Header/>
         <Routes>
-          <Route path={ROUTES.MAIN} element={<App />} />
-          <Route path={ROUTES.COMPARISON} element={<div>hi</div>} />
+          <Route path={ROUTES.MAIN} element={<Overview />} />
+          <Route path={ROUTES.COMPARISON} element={<Comparison />} />
         </Routes>
         <ReactQueryDevtools initialIsOpen={false} />
       </BrowserRouter>
