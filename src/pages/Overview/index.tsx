@@ -39,6 +39,33 @@ function Overview() {
             "stringStringCOF": 0.066,
             "stringBallCOF": 0.507,
             "spinPotential": 7.7
+        },
+        {
+          "name": "Head Hawk 16 (1.30)",
+          "material": "Polyester",
+          "stiffness": 230.3,
+          "energyReturn": 88,
+          "stringStringCOF": 0.071,
+          "stringBallCOF": 0.454,
+          "spinPotential": 6.4
+        },
+        {
+          "name": "Yonex Poly Tour Spin 16L (1.25)",
+          "material": "Polyester",
+          "stiffness": 213.7,
+          "energyReturn": 88.5,
+          "stringStringCOF": 0.1,
+          "stringBallCOF": 0.632,
+          "spinPotential": 6.3
+        },
+        {
+          "name": "Grapplesnake Tour Sniper 1.25",
+          "material": "Polyester",
+          "stiffness": 206.3,
+          "energyReturn": 85.6,
+          "stringStringCOF": 0.086,
+          "stringBallCOF": 0.501,
+          "spinPotential": 5.8
         }
     ]
 
@@ -50,7 +77,6 @@ function Overview() {
     spinPotential: getColumnStats(strings, r => r.spinPotential),
   }
 
-  console.log(statsByColumn)
 
 
   return (
@@ -100,7 +126,7 @@ const mapColumnNames = (data: Record<string, string>[]) => {
 }
 
 const getBg = ({value, stats, higherIsBetter} : {value: number, stats: {min: number, max: number, median: number}, higherIsBetter: boolean}) => {
-  const spectrum = higherIsBetter ?  ["#ef4444", "#ffffff", "#22c55e"] : ["#22c55e", "#ffffff", "#ef4444"]
+  const spectrum = higherIsBetter ?  ["#fecaca", "#ffffff", "#bbf7d0"] : ["#bbf7d0", "#ffffff", "#fecaca"]
 
   const scale = chroma.scale(spectrum).domain([stats.min, stats.median, stats.max])
 
