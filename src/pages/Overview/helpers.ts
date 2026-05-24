@@ -28,8 +28,8 @@ export const getColumnStats = <T>(rows: T[], accessor: (row: T) => number) => {
 const headerMapping = {
   name: "Name",
   material: "Material",
-  stiffness: "Stiffness",
-  energyReturn: "Energy Return",
+  stiffness: "Stiffness (lb/in)",
+  energyReturn: "Energy Return (%)",
   stringStringCOF: "String / String COF",
   stringBallCOF: "String / Ball COF",
   spinPotential: "Spin Potential",
