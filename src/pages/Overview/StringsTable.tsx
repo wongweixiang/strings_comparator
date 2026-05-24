@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 import { type Option } from "@/components/ui/multiple-selector";
 import {
   Table,
@@ -10,13 +12,14 @@ import {
 import { PinButton } from "@/pages/Overview/PinButton";
 import { usePinnedStrings } from "@/pages/Overview/usePinnedStrings";
 
+import type { TennisString } from ".";
 import { getBg, getColumnStats, mapColumnNames } from "./helpers";
 
 export const StringsTable = ({
   strings,
   columns,
 }: {
-  strings: Record<string, unknown>[];
+  strings: TennisString[];
   columns: Option[];
 }) => {
   const headerValues = mapColumnNames(strings);
@@ -30,23 +33,33 @@ export const StringsTable = ({
   const pinnedStrings = usePinnedStrings((state) => state.pinned);
   console.log("Pinned strings:", pinnedStrings);
 
+  const sortedStrings = useMemo(() => {
+    const pinnedNames = new Set(pinnedStrings.map((s) => s.name));
+    return [
+      ...pinnedStrings,
+      ...strings.filter((s) => !pinnedNames.has(s.name)),
+    ];
+  }, [pinnedStrings, strings]);
+
   return (
     <Table>
       <TableHeader>
         <TableRow>
           <TableHead />
           {headerValues.map((hv) => (
-            <TableHead>{hv}</TableHead>
+            <TableHead key={hv}>{hv}</TableHead>
           ))}
         </TableRow>
       </TableHeader>
       <TableBody>
-        {strings.map((s) => (
+        {sortedStrings.map((s) => (
           <TableRow key={s.name}>
             <TableCell className="bg-gray-100">
-              <PinButton name={s.name} />
+              <PinButton stringData={s} />
             </TableCell>
-            <TableCell className="font-medium bg-gray-100">{s.name}</TableCell>
+            <TableCell className="font-medium bg-gray-100 text-left">
+              {s.name}
+            </TableCell>
             <TableCell>{s.material}</TableCell>
             <TableCell
               style={{

@@ -5,8 +5,18 @@ import { type Option } from "@/components/ui/multiple-selector";
 import MultipleSelector from "./MultipleSelector";
 import { StringsTable } from "./StringsTable";
 
+export type TennisString = {
+  name: string;
+  material: string;
+  stiffness: number;
+  energyReturn: number;
+  stringStringCOF: number;
+  stringBallCOF: number;
+  spinPotential: number;
+};
+
 function Overview() {
-  const strings = [
+  const strings: TennisString[] = [
     {
       name: "Weiss Cannon Blue Rock N Power",
       material: "Polyester",
