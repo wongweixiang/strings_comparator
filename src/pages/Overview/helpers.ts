@@ -1,7 +1,5 @@
 import chroma from "chroma-js";
 
-import type { Option } from "@/components/ui/multiple-selector";
-
 export const getColumnStats = <T>(rows: T[], accessor: (row: T) => number) => {
   const values = rows
     .map(accessor)
@@ -30,22 +28,29 @@ const headerMapping = {
   material: "Material",
   stiffness: "Stiffness (lb/in)",
   energyReturn: "Energy Return (%)",
-  stringStringCOF: "String / String COF",
-  stringBallCOF: "String / Ball COF",
+  tensionLoss: "Tension Loss",
   spinPotential: "Spin Potential",
 };
 
 export const mapColumnNames = (data: Record<string, string>[]) => {
+  if (data.length === 0) {
+    return [];
+  }
+
   const headerKeys = Object.keys(data[0]);
 
   return headerKeys.map((hk) => headerMapping[hk]);
 };
 
 export const getSelectorOptions = () => {
-  return Object.keys(headerMapping).map((key) => ({
-    label: headerMapping[key],
-    value: key,
-  }));
+  const columnsToExclude = ["name", "material"];
+
+  return Object.keys(headerMapping)
+    .map((key) => ({
+      label: headerMapping[key],
+      value: key,
+    }))
+    .filter((option) => !columnsToExclude.includes(option.value));
 };
 
 export const getBg = ({

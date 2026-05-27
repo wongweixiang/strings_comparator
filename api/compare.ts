@@ -10,7 +10,7 @@ const COLLECTION = "strings";
 // Reuse the client across warm invocations
 let client: MongoClient;
 
-async function getClient() {
+export async function getClient() {
   if (!client) {
     client = new MongoClient(MONGODB_URI, {
       tls: true,
@@ -45,20 +45,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const client = await getClient();
     const collection = client.db(DB_NAME).collection(COLLECTION);
-
-    const idAStr = idA as string;
-    console.log("idA length:", idAStr.length);
-    console.log(
-      "idA chars:",
-      [...idAStr].map((c) => c.charCodeAt(0)),
-    );
-
-    const sample = await collection.findOne({ custom_id: { $exists: true } });
-    console.log("sample custom_id length:", sample?.custom_id?.length);
-    console.log(
-      "sample custom_id chars:",
-      [...(sample?.custom_id ?? "")].map((c) => c.charCodeAt(0)),
-    );
 
     const [docA, docB] = await Promise.all([
       collection.findOne({ custom_id: idA as string }),

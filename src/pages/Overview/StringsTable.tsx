@@ -26,12 +26,12 @@ export const StringsTable = ({
 
   const statsByColumn = {
     stiffness: getColumnStats(strings, (r) => r.stiffness),
+    tensionLoss: getColumnStats(strings, (r) => r.tensionLoss),
     energyReturn: getColumnStats(strings, (r) => r.energyReturn),
     spinPotential: getColumnStats(strings, (r) => r.spinPotential),
   };
 
   const pinnedStrings = usePinnedStrings((state) => state.pinned);
-  console.log("Pinned strings:", pinnedStrings);
 
   const sortedStrings = useMemo(() => {
     const pinnedNames = new Set(pinnedStrings.map((s) => s.name));
@@ -86,8 +86,19 @@ export const StringsTable = ({
             >
               {s.energyReturn}
             </TableCell>
-            <TableCell className="text-right">{s.stringStringCOF}</TableCell>
-            <TableCell className="text-right">{s.stringBallCOF}</TableCell>
+            <TableCell
+              className="text-right"
+              style={{
+                backgroundColor: getBg({
+                  isSelected: columns.some((c) => c.value === "tensionLoss"),
+                  value: s.tensionLoss,
+                  stats: statsByColumn.tensionLoss,
+                  higherIsBetter: false,
+                }),
+              }}
+            >
+              {s.tensionLoss}
+            </TableCell>
             <TableCell
               className="text-right"
               style={{
