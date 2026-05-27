@@ -5,6 +5,7 @@ import { type Option } from "@/components/ui/multiple-selector";
 import { fetchStrings } from "@/services/listStrings";
 
 import MultipleColumnSelector from "./MultipleColumnSelector";
+import { SortFieldSelect } from "./SortFieldSelect";
 import { StringsTable } from "./StringsTable";
 
 export type TennisString = {
@@ -18,14 +19,16 @@ export type TennisString = {
 
 function Overview() {
   const [columns, setColumns] = useState<Option[]>([]);
+  const [sortBy, setSortBy] = useState<string>("");
 
   const { data } = useQuery({
-    queryKey: ["string-list"],
-    queryFn: () => fetchStrings({ brands: ["Wilson"] }),
+    queryKey: ["string-list", sortBy],
+    queryFn: () => fetchStrings({ brands: ["Wilson"], sortBy }),
   });
 
   return (
     <main className="container mx-auto p-10 ">
+      <SortFieldSelect onValueChange={(value: string) => setSortBy(value)} />
       <MultipleColumnSelector value={columns} onChange={setColumns} />
       <StringsTable strings={data?.docs || []} columns={columns} />
     </main>

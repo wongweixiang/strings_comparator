@@ -52,10 +52,10 @@ const getSortOrder = (sortBy: string): Record<string, SortDirection> => {
   switch (sortBy) {
     case "energyReturn":
     case "spinPotential":
-      return { [sortBy]: 1 };
+      return { [sortBy]: -1 };
     case "stiffness":
     case "tensionLoss":
-      return { [sortBy]: -1 };
+      return { [sortBy]: 1 };
     default:
       return { name: 1 };
   }

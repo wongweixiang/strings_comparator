@@ -2,7 +2,7 @@ import type { TennisString } from "@/pages/Overview";
 
 type FetchStringsProps = {
   brands?: string[];
-  sortBy?: "stiffness" | "energyReturn" | "tensionLoss" | "spinPotential";
+  sortBy?: string | undefined;
 };
 
 type FetchStringsResponse = {
