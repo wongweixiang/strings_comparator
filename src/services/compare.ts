@@ -20,10 +20,10 @@ type CompareResponse = {
 };
 
 export async function fetchComparison(
-  nameA: string,
-  nameB: string,
+  idA: string,
+  idB: string,
 ): Promise<CompareResponse> {
-  const params = new URLSearchParams({ nameA, nameB });
+  const params = new URLSearchParams({ idA, idB });
   const response = await fetch(`/api/compare?${params}`);
 
   if (!response.ok) {

@@ -8,8 +8,8 @@ import { SearchBox } from "../SearchBox";
 import { fetchComparison } from "../services/compare";
 
 function Comparison() {
-  const [string0, setString0] = useState("Toroline O-Toro Spin 17 (1.23)");
-  const [string1, setString1] = useState("Diadem Solstice Pro 16L (1.25)");
+  const [string0, setString0] = useState("VSQ16");
+  const [string1, setString1] = useState("BRPMBRS");
 
   const { data } = useQuery({
     queryKey: ["string-comparison", string0, string1],

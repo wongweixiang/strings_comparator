@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
 import { type Option } from "@/components/ui/multiple-selector";
@@ -74,6 +75,11 @@ function Overview() {
   ];
 
   const [columns, setColumns] = useState<Option[]>([]);
+
+  const { data } = useQuery({
+    queryKey: ["string-list"],
+    queryFn: () => fetchStringList(),
+  });
 
   return (
     <main className="container mx-auto p-10 ">

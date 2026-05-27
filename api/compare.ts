@@ -34,28 +34,41 @@ function formatStats(doc: Record<string, unknown>) {
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  const { nameA, nameB } = req.query;
+  const { idA, idB } = req.query;
 
-  if (!nameA || !nameB) {
+  if (!idA || !idB) {
     return res
       .status(400)
-      .json({ error: "nameA and nameB query params are required" });
+      .json({ error: "idA and idB query params are required" });
   }
 
   try {
     const client = await getClient();
-    console.log({client})
     const collection = client.db(DB_NAME).collection(COLLECTION);
 
+    const idAStr = idA as string;
+    console.log("idA length:", idAStr.length);
+    console.log(
+      "idA chars:",
+      [...idAStr].map((c) => c.charCodeAt(0)),
+    );
+
+    const sample = await collection.findOne({ custom_id: { $exists: true } });
+    console.log("sample custom_id length:", sample?.custom_id?.length);
+    console.log(
+      "sample custom_id chars:",
+      [...(sample?.custom_id ?? "")].map((c) => c.charCodeAt(0)),
+    );
+
     const [docA, docB] = await Promise.all([
-      collection.findOne({ name: nameA as string }),
-      collection.findOne({ name: nameB as string }),
+      collection.findOne({ custom_id: idA as string }),
+      collection.findOne({ custom_id: idB as string }),
     ]);
 
     if (!docA)
-      return res.status(404).json({ error: `String not found: ${nameA}` });
+      return res.status(404).json({ error: `String not found: ${idA}` });
     if (!docB)
-      return res.status(404).json({ error: `String not found: ${nameB}` });
+      return res.status(404).json({ error: `String not found: ${idB}` });
 
     return res.status(200).json({
       stringA: {
