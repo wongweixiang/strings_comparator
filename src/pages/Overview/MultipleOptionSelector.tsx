@@ -2,29 +2,26 @@ import MultipleSelector, {
   type Option,
 } from "@/components/ui/multiple-selector";
 
-import { getSelectorOptions } from "./helpers";
-
-const OPTIONS: Option[] = getSelectorOptions();
-
 type MultipleColumnSelectorProps = {
-  value?: Option[];
   onChange?: (value: Option[]) => void;
+  defaultOptions?: Option[];
+  placeholder?: string;
 };
 
-const MultipleColumnSelector = ({
-  value,
+const MultipleOptionSelector = ({
   onChange,
+  defaultOptions,
+  placeholder,
 }: MultipleColumnSelectorProps) => {
   return (
     <div className="flex w-full flex-col gap-5 px-10">
       <MultipleSelector
-        value={value}
         onChange={onChange}
-        defaultOptions={OPTIONS}
-        placeholder="Columns to highlight"
+        defaultOptions={defaultOptions}
+        placeholder={placeholder}
         emptyIndicator={
           <p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
-            no results found.
+            No fields found.
           </p>
         }
       />
@@ -32,4 +29,4 @@ const MultipleColumnSelector = ({
   );
 };
 
-export default MultipleColumnSelector;
+export default MultipleOptionSelector;

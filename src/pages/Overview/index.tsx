@@ -4,7 +4,8 @@ import { useState } from "react";
 import { type Option } from "@/components/ui/multiple-selector";
 import { fetchStrings } from "@/services/listStrings";
 
-import MultipleColumnSelector from "./MultipleColumnSelector";
+import { BRAND_OPTIONS, getSelectorOptions } from "./helpers";
+import MultipleOptionSelector from "./MultipleOptionSelector";
 import { SortFieldSelect } from "./SortFieldSelect";
 import { StringsTable } from "./StringsTable";
 
@@ -19,17 +20,30 @@ export type TennisString = {
 
 function Overview() {
   const [columns, setColumns] = useState<Option[]>([]);
+  const [brands, setBrands] = useState<Option[]>([]);
   const [sortBy, setSortBy] = useState<string>("");
 
+  console.log("Selected brands for filtering:", brands);
+
   const { data } = useQuery({
-    queryKey: ["string-list", sortBy],
-    queryFn: () => fetchStrings({ brands: ["Wilson"], sortBy }),
+    queryKey: ["string-list", brands, sortBy],
+    queryFn: () => fetchStrings({ brands: brands.map((b) => b.value), sortBy }),
   });
 
   return (
     <main className="container mx-auto p-10 ">
       <SortFieldSelect onValueChange={(value: string) => setSortBy(value)} />
-      <MultipleColumnSelector value={columns} onChange={setColumns} />
+      <MultipleOptionSelector
+        onChange={setBrands}
+        defaultOptions={BRAND_OPTIONS}
+        placeholder="Select brands to filter"
+      />
+      <MultipleOptionSelector
+        onChange={setColumns}
+        defaultOptions={getSelectorOptions()}
+        placeholder="Columns to highlight"
+      />
+
       <StringsTable strings={data?.docs || []} columns={columns} />
     </main>
   );

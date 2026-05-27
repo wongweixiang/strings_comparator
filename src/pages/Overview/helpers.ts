@@ -78,3 +78,22 @@ export const getBg = ({
 
   return scale(value).hex();
 };
+
+export const BRAND_OPTIONS = [
+  { label: "Solinco", value: "Solinco" },
+  { label: "Toroline", value: "Toroline" },
+  { label: "Wilson", value: "Wilson" },
+  { label: "Babolat", value: "Babolat" },
+  { label: "Head", value: "Head" },
+  { label: "Luxilon", value: "Luxilon" },
+  { label: "Tecnifibre", value: "Tecnifibre" },
+  { label: "Yonex", value: "Yonex" },
+  { label: "Prince", value: "Prince" },
+  { label: "Gamma", value: "Gamma" },
+  { label: "Volkl", value: "Volkl" },
+  { label: "Dunlop", value: "Dunlop" },
+  { label: "Kirschbaum", value: "Kirschbaum" },
+  { label: "Ashaway", value: "Ashaway" },
+  { label: "Gosen", value: "Gosen" },
+  { label: "Pacific", value: "Pacific" },
+];
