@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { Link } from "react-router";
 
 import { type Option } from "@/components/ui/multiple-selector";
 import {
@@ -57,9 +58,17 @@ export const StringsTable = ({
             <TableCell className="bg-gray-100">
               <PinButton stringData={s} />
             </TableCell>
-            <TableCell className="font-medium bg-gray-100 text-left">
-              {s.name}
-            </TableCell>
+            <Link
+              className="block w-full"
+              key={s.name}
+              to={{
+                pathname: `/string_details/${encodeURIComponent(s.name)}`,
+              }}
+            >
+              <TableCell className="font-medium bg-gray-100 text-left">
+                {s.name}
+              </TableCell>
+            </Link>
             <TableCell>{s.material}</TableCell>
             <TableCell
               style={{

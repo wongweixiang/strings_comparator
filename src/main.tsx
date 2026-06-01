@@ -10,6 +10,7 @@ import { ROUTES } from "./constants/routes.ts";
 import { Header } from "./Header.tsx";
 import Comparison from "./pages/Comparison";
 import Overview from "./pages/Overview";
+import StringDetails from "./pages/StringDetails";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ createRoot(document.getElementById("root")!).render(
         <Routes>
           <Route path={ROUTES.MAIN} element={<Overview />} />
           <Route path={ROUTES.COMPARISON} element={<Comparison />} />
+          <Route path={ROUTES.STRING_DETAILS} element={<StringDetails />} />
         </Routes>
         <ReactQueryDevtools initialIsOpen={false} />
       </BrowserRouter>
