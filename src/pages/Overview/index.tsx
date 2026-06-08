@@ -23,8 +23,6 @@ function Overview() {
   const [brands, setBrands] = useState<Option[]>([]);
   const [sortBy, setSortBy] = useState<string>("");
 
-  console.log("Selected brands for filtering:", brands);
-
   const { data, isLoading } = useQuery({
     queryKey: ["string-list", brands, sortBy],
     queryFn: () => fetchStrings({ brands: brands.map((b) => b.value), sortBy }),

@@ -18,7 +18,7 @@ export function SortFieldSelect({
 
   return (
     <Select onValueChange={onValueChange}>
-      <SelectTrigger>
+      <SelectTrigger className="w-full my-1">
         <SelectValue placeholder="Sort by" />
       </SelectTrigger>
       <SelectContent>
