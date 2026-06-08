@@ -25,7 +25,7 @@ function Overview() {
 
   console.log("Selected brands for filtering:", brands);
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["string-list", brands, sortBy],
     queryFn: () => fetchStrings({ brands: brands.map((b) => b.value), sortBy }),
   });
@@ -44,7 +44,11 @@ function Overview() {
         placeholder="Columns to highlight"
       />
 
-      <StringsTable strings={data?.docs || []} columns={columns} />
+      <StringsTable
+        isLoading={isLoading}
+        strings={data?.docs || []}
+        columns={columns}
+      />
     </main>
   );
 }
