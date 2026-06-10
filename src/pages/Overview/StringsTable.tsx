@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { Link } from "react-router";
 
 import { type Option } from "@/components/ui/multiple-selector";
+import { Spinner } from "@/components/ui/spinner";
 import {
   Table,
   TableBody,
@@ -47,8 +48,8 @@ export const StringsTable = ({
 
   if (isLoading) {
     return (
-      <div className="text-center my-auto h-full text-muted-foreground">
-        Loading strings...
+      <div className="flex items-center justify-center my-52">
+        <Spinner className="size-16" />
       </div>
     );
   }

@@ -9,7 +9,6 @@ export const Header = () => {
   const navLinks = [
     { label: "Overview", path: ROUTES.MAIN },
     { label: "Compare", path: ROUTES.COMPARISON },
-    { label: "String Details", path: ROUTES.STRING_DETAILS },
   ];
 
   return (
