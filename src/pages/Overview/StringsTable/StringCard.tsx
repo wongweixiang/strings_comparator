@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { type Option } from "@/components/ui/multiple-selector";
 import { PinButton } from "@/pages/Overview/PinButton";
 
-import type { TennisString } from ".";
-import { getBg } from "./helpers";
+import type { TennisString } from "..";
+import { getBg } from "../helpers";
 
 type StringCardProps = {
   stringData: TennisString;
