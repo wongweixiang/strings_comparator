@@ -13,8 +13,8 @@ import { options } from "@/constants/options";
 import type { Option } from "./constants/options";
 
 type SearchBoxProps = {
-  value?: string;
-  setValue?: (value: string) => void;
+  value?: Option;
+  setValue?: (value: Option | null) => void;
 };
 
 export const SearchBox: FC<SearchBoxProps> = ({ value, setValue }) => {

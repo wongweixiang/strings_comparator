@@ -8,13 +8,20 @@ import { SearchBox } from "../SearchBox";
 import { fetchComparison } from "../services/compare";
 
 function Comparison() {
-  const [string0, setString0] = useState("VSQ16");
-  const [string1, setString1] = useState("BRPMBRS");
+  const [string0, setString0] = useState({
+    name: "Volkl V-Square 16 (1.30)",
+    value: "VSQ16",
+  });
+
+  const [string1, setString1] = useState({
+    name: "Babolat RPM Blast Rough 17",
+    value: "BRPMBRS",
+  });
 
   const { data } = useQuery({
-    queryKey: ["string-comparison", string0, string1],
-    queryFn: () => fetchComparison(string0, string1),
-    enabled: !!string0 && !!string1,
+    queryKey: ["string-comparison", string0.value, string1.value],
+    queryFn: () => fetchComparison(string0.value, string1.value),
+    enabled: !!string0.value && !!string1.value,
   });
 
   console.log("Comparison data:", data);
