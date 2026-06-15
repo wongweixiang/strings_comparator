@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
 import StringComparison from "../ComparisonTable";
+import type { Option } from "../constants/options";
 import { SearchBox } from "../SearchBox";
 import { fetchComparison } from "../services/compare";
 
@@ -29,8 +30,14 @@ function Comparison() {
   return (
     <>
       <section id="center">
-        <SearchBox value={string0} setValue={setString0} />
-        <SearchBox value={string1} setValue={setString1} />
+        <SearchBox
+          value={string0}
+          setValue={setString0 as (value: Option | null) => void}
+        />
+        <SearchBox
+          value={string1}
+          setValue={setString1 as (value: Option | null) => void}
+        />
         <StringComparison data={data} />
       </section>
     </>
