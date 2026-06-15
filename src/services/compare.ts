@@ -1,14 +1,15 @@
 // src/api/compare.ts
 type StringStats = {
-  stiffness: number | null;
-  tensionLoss: number | null;
-  energyReturn: number | null;
-  spinPotential: number | null;
-  stringFriction: number | null;
-  ballFriction: number | null;
+  stiffness: number | string;
+  tensionLoss: number | string;
+  energyReturn: number | string;
+  spinPotential: number | string;
+  stringFriction: number | string;
+  ballFriction: number | string;
 };
 
 type StringData = {
+  code: string;
   name: string;
   material: string;
   stats: StringStats;

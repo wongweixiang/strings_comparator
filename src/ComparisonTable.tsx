@@ -1,22 +1,26 @@
 import type { FC } from "react";
 
-import { STAT_CONFIG, STAT_KEYS, type StatConfig } from "./constants/statConfig";
-import type { CompareStringsResponse, StringData } from "./services/compareStrings";
-
-
-
+import {
+  STAT_CONFIG,
+  STAT_KEYS,
+  type StatConfig,
+} from "./constants/statConfig";
+import type {
+  CompareStringsResponse,
+  StringData,
+} from "./services/compareStrings";
 
 const placeholder: StringData = {
   code: "",
   name: "",
   material: "",
   stats: {
-    stiffness: '',
-    tensionLoss: '',
-    energyReturn: '',
-    spinPotential: '',
-    stringFriction: '',
-    ballFriction: '',
+    stiffness: "",
+    tensionLoss: "",
+    energyReturn: "",
+    spinPotential: "",
+    stringFriction: "",
+    ballFriction: "",
   },
 };
 
@@ -25,7 +29,7 @@ const DIFF_THRESHOLD = 0.03;
 function getWinner(
   valA: number,
   valB: number,
-  higherIsBetter: boolean
+  higherIsBetter: boolean,
 ): "A" | "B" | "tie" {
   const diff = Math.abs(valA - valB) / Math.max(valA, valB);
   if (diff < DIFF_THRESHOLD) return "tie";
@@ -60,7 +64,9 @@ function StatRow({ config, valA, valB }: StatRowProps) {
     const l = winner !== "tie" && winner !== side;
     return [
       "flex items-center py-3 px-4",
-      w ? "bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300" : "",
+      w
+        ? "bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300"
+        : "",
       l ? "bg-red-50 text-red-800 dark:bg-red-950 dark:text-red-300" : "",
       !w && !l ? "text-gray-700 dark:text-gray-300" : "",
     ]
@@ -70,7 +76,8 @@ function StatRow({ config, valA, valB }: StatRowProps) {
 
   const barColor = (side: "A" | "B") => {
     if (winner === side) return "bg-emerald-400 dark:bg-emerald-600";
-    if (winner !== "tie" && winner !== side) return "bg-red-300 dark:bg-red-700";
+    if (winner !== "tie" && winner !== side)
+      return "bg-red-300 dark:bg-red-700";
     return "bg-gray-200 dark:bg-gray-700";
   };
 
@@ -113,20 +120,29 @@ function StatRow({ config, valA, valB }: StatRowProps) {
 }
 
 type StringComparisonProps = {
-  data: CompareStringsResponse | undefined
-}
+  data: CompareStringsResponse | undefined;
+};
 
 const StringComparison: FC<StringComparisonProps> = ({ data }) => {
-    const dataIncludingPlaceholder = data ?? { stringA: placeholder, stringB: placeholder }
+  const dataIncludingPlaceholder = data ?? {
+    stringA: placeholder,
+    stringB: placeholder,
+  };
 
-    const {stringA, stringB} = dataIncludingPlaceholder
+  const { stringA, stringB } = dataIncludingPlaceholder;
 
   return (
     <div className="max-w-2xl mx-auto p-6 font-sans">
       <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 mb-6">
-        <div className='flex flex-col justify-center items-center'>
-          <img width='150px' height='150px' src={`https://img.tennis-warehouse.com/watermark/rs.php?path=${stringA.code}-1.jpg`} />
-          <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{stringA.name}</p>
+        <div className="flex flex-col justify-center items-center">
+          <img
+            width="150px"
+            height="150px"
+            src={`https://img.tennis-warehouse.com/watermark/rs.php?path=${stringA.code}-1.jpg`}
+          />
+          <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
+            {stringA.name}
+          </p>
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
             {stringA.material}
           </p>
@@ -134,9 +150,15 @@ const StringComparison: FC<StringComparisonProps> = ({ data }) => {
         <div className="text-xs text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2 text-center">
           vs
         </div>
-        <div  className='flex flex-col justify-center items-center'>
-          <img width='150px' height='150px' src={`https://img.tennis-warehouse.com/watermark/rs.php?path=${stringB.code}-1.jpg`} />
-          <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{stringB.name}</p>
+        <div className="flex flex-col justify-center items-center">
+          <img
+            width="150px"
+            height="150px"
+            src={`https://img.tennis-warehouse.com/watermark/rs.php?path=${stringB.code}-1.jpg`}
+          />
+          <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
+            {stringB.name}
+          </p>
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
             {stringB.material}
           </p>
@@ -157,26 +179,31 @@ const StringComparison: FC<StringComparisonProps> = ({ data }) => {
       <div className="flex items-center justify-center gap-5 mt-4">
         {[
           {
-            color: "bg-emerald-50 border-emerald-300 dark:bg-emerald-950 dark:border-emerald-700",
+            color:
+              "bg-emerald-50 border-emerald-300 dark:bg-emerald-950 dark:border-emerald-700",
             label: "better",
           },
           {
-            color: "bg-red-50 border-red-300 dark:bg-red-950 dark:border-red-700",
+            color:
+              "bg-red-50 border-red-300 dark:bg-red-950 dark:border-red-700",
             label: "worse",
           },
           {
-            color: "bg-gray-100 border-gray-300 dark:bg-gray-800 dark:border-gray-600",
+            color:
+              "bg-gray-100 border-gray-300 dark:bg-gray-800 dark:border-gray-600",
             label: "marginal diff",
           },
         ].map(({ color, label }) => (
           <div key={label} className="flex items-center gap-1.5">
             <div className={`w-2.5 h-2.5 rounded-sm border ${color}`} />
-            <span className="text-xs text-gray-400 dark:text-gray-500">{label}</span>
+            <span className="text-xs text-gray-400 dark:text-gray-500">
+              {label}
+            </span>
           </div>
         ))}
       </div>
     </div>
   );
-}
+};
 
-export default StringComparison
+export default StringComparison;

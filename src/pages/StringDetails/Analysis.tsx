@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 
-import type { StringDoc } from "./Layout";
+import type { StringDoc } from "@/services/stringDetails";
+
 import { useAnalysis } from "./useAnalysis";
 
 type AnalysisProps = {

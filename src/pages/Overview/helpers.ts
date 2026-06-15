@@ -1,5 +1,7 @@
 import chroma from "chroma-js";
 
+import type { TennisString } from ".";
+
 export const getColumnStats = <T>(rows: T[], accessor: (row: T) => number) => {
   const values = rows
     .map(accessor)
@@ -30,9 +32,9 @@ const headerMapping = {
   energyReturn: "Energy Return (%)",
   tensionLoss: "Tension Loss",
   spinPotential: "Spin Potential",
-};
+} as Record<string, string>;
 
-export const mapColumnNames = (data: Record<string, string>[]) => {
+export const mapColumnNames = (data: TennisString[]) => {
   if (data.length === 0) {
     return [];
   }

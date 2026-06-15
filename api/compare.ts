@@ -58,11 +58,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     return res.status(200).json({
       stringA: {
+        code: docA.custom_id,
         name: docA.name,
         material: docA.material,
         stats: formatStats(docA),
       },
       stringB: {
+        code: docB.custom_id,
         name: docB.name,
         material: docB.material,
         stats: formatStats(docB),

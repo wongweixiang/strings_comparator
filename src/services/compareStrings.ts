@@ -48,6 +48,8 @@ export type CompareStringsResponse = {
   stringB: StringData;
 };
 
+// deprecated, use compare instead
+
 export const compareStrings = async (
   params: CompareStringsParams,
 ): Promise<CompareStringsResponse> => {

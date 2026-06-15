@@ -11,7 +11,7 @@ const StringDetails = () => {
 
   const { data } = useQuery({
     queryKey: ["string-details", name],
-    queryFn: () => fetchStringDetails({ name }),
+    queryFn: () => fetchStringDetails({ name: name! }),
     enabled: !!name, // Only run the query if name is available
   });
 

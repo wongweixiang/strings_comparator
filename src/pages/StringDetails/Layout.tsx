@@ -1,32 +1,6 @@
-import { Analysis } from "./Analysis";
+import type { StringDoc } from "@/services/stringDetails";
 
-export type StringDoc = {
-  custom_id: string;
-  name: string;
-  material: string;
-  gaugeNominal: number | null;
-  gaugeActual: number | null;
-  stiffness: number | null;
-  spinPotential: number | null;
-  tensionLoss: number | null;
-  energyReturn: number | null;
-  stringStringCOF: number | null;
-  stringBallCOF: number | null;
-  refTension: number | null;
-  preImpactTension: number | null;
-  tensionChange: number | null;
-  staticLoss: number | null;
-  stabilizationLoss: number | null;
-  impactLoss: number | null;
-  totalLoss: number | null;
-  dwellTime: number | null;
-  deflection: number | null;
-  peakTension: number | null;
-  peakPerpForce: number | null;
-  stretchAt40: number | null;
-  stretchAt51: number | null;
-  stretchAt62: number | null;
-};
+import { Analysis } from "./Analysis";
 
 type StringDetailProps = {
   doc: StringDoc;

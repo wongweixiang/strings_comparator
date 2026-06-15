@@ -12,26 +12,20 @@ import { options } from "@/constants/options";
 
 import type { Option } from "./constants/options";
 
-// type StringOption = {
-//   name: string
-//   value: string
-// }
-
 type SearchBoxProps = {
   value?: string;
   setValue?: (value: string) => void;
 };
 
-// value={value} onValueChange={setValue}
-
 export const SearchBox: FC<SearchBoxProps> = ({ value, setValue }) => {
   return (
-    <Combobox items={options} 
-    value={value} onValueChange={setValue}
-    itemToStringValue={(option: Option) => option.name}
+    <Combobox
+      items={options}
+      value={value}
+      onValueChange={setValue}
+      itemToStringValue={(option: Option) => option.name}
     >
-      <ComboboxInput placeholder="Select a string" 
-      />
+      <ComboboxInput placeholder="Select a string" />
       <ComboboxContent>
         <ComboboxEmpty>No items found.</ComboboxEmpty>
         <ComboboxList>
